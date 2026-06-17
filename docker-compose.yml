@@ -1,0 +1,90 @@
+services:
+  tailscale:
+    image: tailscale/tailscale:stable
+    container_name: tailscale
+    hostname: ${TS_HOSTNAME}
+    restart: unless-stopped
+    network_mode: host
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    volumes:
+      - tailscale_data:/var/lib/tailscale
+    secrets:
+      - ts_authkey
+    environment:
+      - TS_STATE_DIR=${TS_STATE_DIR}
+      - TS_HOSTNAME=${TS_HOSTNAME}
+      - TS_AUTH_ONCE=${TS_AUTH_ONCE}
+      - TS_USERSPACE=${TS_USERSPACE}
+    command: >
+      sh -c "tailscaled &
+      sleep 2 &&
+      tailscale up --authkey=$$(cat /run/secrets/ts_authkey) &&
+      wait"
+
+  mariadb:
+    image: mariadb:11.8
+    container_name: mariadb
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db_root_password
+      - MYSQL_PASSWORD_FILE=/run/secrets/db_password
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+    secrets:
+      - db_password
+      - db_root_password
+    volumes:
+      - ./data/mariadb:/var/lib/mysql
+    networks:
+      - private
+
+  redis:
+    image: redis:alpine
+    container_name: redis
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data
+    networks:
+      - private
+
+  nextcloud:
+    image: nextcloud:31-apache
+    container_name: nextcloud
+    restart: unless-stopped
+    depends_on:
+      - mariadb
+      - redis
+    ports:
+      - "8080:80"
+    environment:
+      - MYSQL_HOST=mariadb
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD_FILE=/run/secrets/db_password
+      - REDIS_HOST=redis
+    secrets:
+      - db_password
+    volumes:
+      - nextcloud_data:/var/www/html
+    networks:
+      - private
+
+volumes:
+  tailscale_data:
+  nextcloud_data:
+  redis_data:
+
+networks:
+  private:
+
+secrets:
+  db_password:
+    file: ./secrets/mariadb_password.txt
+  db_root_password:
+    file: ./secrets/mariadb_root_password.txt
+  ts_authkey:
+    file: ./secrets/ts_authkey.txt
