@@ -1,0 +1,15 @@
+
+.env
+secrets/
+data/
+*.log
+
+# Nextcloud / database local data
+nextcloud_data/
+mariadb_data/
+redis_data/
+
+# OS/editor files
+.DS_Store
+.vscode/
+.idea/
