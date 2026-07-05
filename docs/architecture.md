@@ -2,7 +2,7 @@
 
 ## Overview
 
-    This project provides a private cloud storage platform for a small company.
+This project provides a private cloud storage platform for a small company.
 
 ## Goals
 
