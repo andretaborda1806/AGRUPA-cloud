@@ -60,9 +60,7 @@ All containers are connected to a private Docker network.
 ## Access Flow
 
 <table>
-  <tr>
     <td>User opens the Tailscale app</td>
-  </tr>
   <tr>
     <td align="center">↓</td>
   </tr>
