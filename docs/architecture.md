@@ -61,7 +61,9 @@ All containers are connected to a private Docker network.
 
 <table>
     <td>User opens the Tailscale app</td>
-    <td align="center">↓</td>
+    <tr>
+        <td align="center">↓</td>
+    </tr>
   <tr>
     <td>User connects to the tailnet</td>
   </tr>
