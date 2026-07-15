@@ -15,6 +15,7 @@ A private, docker-based collaboration platform for a small company. The platform
 
 ## Architecture
 
+```mermaid
 graph TB
     subgraph VPS["VPS"]
         subgraph Containers["Docker Containers"]
@@ -57,3 +58,4 @@ graph TB
     class VOL storage
     class EMP,INT external
     class VPS,Containers vpsBox
+```
