@@ -23,12 +23,12 @@ config:
 ---
 flowchart TB
  subgraph Containers["Docker Containers"]
-        NC["Nextcloud"]
-        WG["Wireguard VPN"]
+        NC(["Nextcloud"])
+        WG(["Wireguard VPN"])
         MDB["MariaDB"]
-        RD["Redis"]
-        CO["Collabora Online"]
-        CD["CoreDNS"]
+        RD(["Redis"])
+        CO(["Collabora Online"])
+        CD(["CoreDNS"])
   end
  subgraph Storage["Persistent Storage"]
         VOL["MariaDB Volume"]
@@ -37,17 +37,20 @@ flowchart TB
         Containers
         Storage
   end
-    EMP["Employee"] -- VPN Connection --> WG
+    EMP(["Employee"]) -- VPN Connection --> WG
     WG -- VPN Active --> NC
     NC -- Query Data --> MDB
     MDB -- Read/Write --> VOL
     NC -- Cache Layer --> RD
     NC -- Document Editing --> CO
     WG -- DNS Resolution --> CD
-    CD -- DNS Queries --> INT["Internet"]
+    CD -- DNS Queries --> INT(["Internet"])
     EMP -- No VPN --> INT
     INT -. Blocked .-> NC
 
-    style Containers fill:transparent,stroke:#ffffff
-    style VPS fill:transparent,stroke:#ffffff
+    MDB@{ shape: rounded}
+    style VOL fill:#ffffff
+    style Containers fill:#fcfcfc,stroke:#fcfcfc
+    style Storage fill:#FFE0B2,stroke:#FFE0B2
+    style VPS fill:#C8E6C9,stroke:#C8E6C9
 ```
