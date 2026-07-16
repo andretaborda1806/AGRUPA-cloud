@@ -1,43 +1,39 @@
 services:
-  tailscale:
-    image: tailscale/tailscale:stable
-    container_name: tailscale
+  wireguard:
+    image: linuxserver/wireguard
+    container_name: wireguard
+    restart: unless-stopped
+
     cap_add:
       - NET_ADMIN
-      - NET_RAW
-    devices:
-      - /dev/net/tun:/dev/net/tun
-    volumes:
-      - tailscale_data:/var/lib/tailscale
-    secrets:
-      - ts_authkey
-    depends_on:
-      - nextcloud
+      - SYS_MODULE
+
     env_file:
       - .env
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark=1
+
+    ports:
+      - "51820:51820/udp"
+
+    volumes:
+      - ./data/wireguard:/config
+      - /lib/modules:/lib/modules
+
     networks:
       - private
-    command: >
-      sh -c "
-        tailscaled --state=/var/lib/tailscale/tailscaled.state &
-        sleep 3;
-        tailscale up --authkey=$$(cat /run/secrets/ts_authkey) --hostname=${TS_HOSTNAME};
-        tailscale serve --bg http://nextcloud:80;
-        tail -f /dev/null
-      "
-    restart: unless-stopped
 
   mariadb:
     image: mariadb:11.8
     container_name: mariadb
     restart: unless-stopped
     env_file:
-      - .env 
+      - .env
     secrets:
       - db_password
       - db_root_password
     volumes:
-      - ./data/mariadb:/var/lib/mysql
+      - /mnt/HC_Volume_106259255/mariadb:/var/lib/mysql
     networks:
       - private
 
@@ -51,37 +47,66 @@ services:
       - .env
     networks:
       - private
-
   nextcloud:
     image: nextcloud:31-apache
     container_name: nextcloud
     restart: unless-stopped
+    extra_hosts:
+      - "cloud.agrupa.vpn:10.0.0.2"
     depends_on:
+      - wireguard
       - mariadb
       - redis
-    expose:
-      - "80"
+    ports:
+      - "80:80"
     env_file:
       - .env
     secrets:
       - db_password
     volumes:
-      - nextcloud_data:/var/www/html
+      - nextcloud_config:/var/www/html/config
+      - nextcloud_apps:/var/www/html/custom_apps
+      - /mnt/storagebox/nextcloud-data:/var/www/html/data
+    networks:
+      - private
+
+  collabora:
+    image: collabora/code:latest
+    container_name: collabora
+    restart: unless-stopped
+
+    cap_add:
+      - MKNOD
+
+    environment:
+      aliasgroup1: "http://cloud.agrupa.vpn:80"
+      extra_params: >-
+        --o:ssl.enable=false
+        --o:ssl.termination=false
+        --o:num_prespawn_children=1
+      username: "${COLLABORA_ADMIN_USER}"
+      password: "${COLLABORA_ADMIN_PASSWORD}"
+
+    ports:
+      - "10.0.0.2:9980:9980"
+
+    extra_hosts:
+      - "cloud.agrupa.vpn:10.0.0.2"
+
     networks:
       - private
 
 volumes:
-  tailscale_data:
-  nextcloud_data:
+  nextcloud_apps:
+  nextcloud_config:
   redis_data:
 
 networks:
   private:
+    driver: bridge
 
 secrets:
   db_password:
     file: ./secrets/mariadb_password.txt
   db_root_password:
     file: ./secrets/mariadb_root_password.txt
-  ts_authkey:
-    file: ./secrets/ts_authkey.txt
