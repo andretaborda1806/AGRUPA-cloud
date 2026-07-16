@@ -109,22 +109,18 @@ The project uses a VPN-first access model. Users must connect through WireGuard 
 
 The main security measures include:
 
-WireGuard VPN for remote access
-Internal Docker networks
-No public exposure of MariaDB or Redis
-Environment variables separated from source code
-Docker secrets for sensitive credentials
-Restricted file permissions
-Persistent data stored outside the containers
-Private DNS names available only to VPN clients
+* Only Nextcloud can be publicly accessed through Wireguard VPN
+* Internal Docker networks
+* Environment variables separated
+* Docker secrets for sensitive credentials
+* Persistent data stored outside the containers
+* Private DNS names available only to VPN clients
 
-Sensitive files such as .env, passwords, private keys, database dumps and WireGuard peer configurations must never be committed to the repository.
+## Limitations of this implementations
 
-## Limitations
-
-Access is limited due to performance constraints
-The platform depends on a single server.
-Collabora Online may require additional CPU and memory resources.
-Monitoring and alerting are limited.
-Service access depends on the WireGuard VPN being available.
-Doesnt have HTTPS inside the VPN network
+- It requires some upfront cost
+- Dependent on a cloud vps service
+- Collabora Online may require additional CPU and memory resources.
+- Service access depends on the WireGuard VPN being available.
+- Doesnt have HTTPS inside the VPN network
+- This project tries to mimic some funcionalities of Google Drive using only opensource code
