@@ -12,4 +12,5 @@ redis_data/
 # OS/editor files
 .DS_Store
 .vscode/
-.idea/
+.idea/secrets/
+.env
