@@ -3,6 +3,15 @@
 
 A private, docker-based collaboration platform for a small company. The platform is intended to keep internal services protected from direct public access by requiring users to connect through a VPN.
 
+## Features
+
+- Private file storage
+- Secure remote access
+- Online document editing
+- Private DNS
+- Persistent database
+- Caching and file locking
+
 ## Technologies
 
 * Docker
@@ -67,3 +76,10 @@ flowchart TB
     class NCDATA externalStorage
     class EMP,INT external
 ```
+## Requirements
+
+- Linux server
+- Docker
+- Docker Compose
+
+## 
