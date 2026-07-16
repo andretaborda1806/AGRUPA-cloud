@@ -79,7 +79,32 @@ flowchart TB
 ## Requirements
 
 - Linux server
-- Docker
+- Docker Engine
 - Docker Compose
+- Linux server
+- Public IP address
+- UDP port 51820 available for WireGuard
+- At least 2 CPU cores
+- At least 4 GB of RAM
+- At least 20 GB of storage
 
+More memory is recommended when using Collabora Online, especially when multiple documents are opened simultaneously.
+
+## Services
+
+CoreDNS
+Resolves private service domains for VPN clients
+VPN network only
+Nextcloud
+Provides file storage, sharing and user management
+VPN network only
+MariaDB
+Stores Nextcloud application data
+Docker network only
+Redis
+Provides caching and file locking
+Docker network only
+Collabora Online
+Provides browser-based document editing
+VPN network only
 ## 
