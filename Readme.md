@@ -92,8 +92,6 @@ More memory is recommended when using Collabora Online, especially when multiple
 
 ## Services
 
-## Services
-
 | Service | Purpose | Port / Access |
 |---|---|---|
 | WireGuard | Provides secure remote access to the server | `51820/UDP` |
