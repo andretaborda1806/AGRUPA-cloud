@@ -8,7 +8,7 @@ The Storage Box currently needs to be mounted manually with SSHFS.
 Command:
 
 ```bash id="5n7at5"
-sudo sshfs -p 22 u628575@u628575.your-storagebox.de:/ /mnt/storagebox \
+sudo sshfs -p 22 uxxxxxx@uxxxxxx.your-storagebox.de:/ /mnt/storagebox \
   -o allow_other,reconnect,ServerAliveInterval=15,ServerAliveCountMax=3
 ```
 

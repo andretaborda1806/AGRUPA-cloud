@@ -52,7 +52,7 @@ df -h /mnt/storagebox
 Expected Storage Box output:
 
 ```txt id="8yg1lw"
-u628575@u628575.your-storagebox.de:/ ... /mnt/storagebox
+uxxxxxx@uxxxxxx.your-storagebox.de:/ ... /mnt/storagebox
 ```
 
 ## Start procedure
@@ -183,7 +183,7 @@ If the Storage Box is not mounted:
 
 ```bash id="z1eukd"
 docker compose stop nextcloud
-sudo sshfs -p 22 u628575@u628575.your-storagebox.de:/ /mnt/storagebox \
+sudo sshfs -p 22 uxxxxxx@uxxxxxx.your-storagebox.de:/ /mnt/storagebox \
   -o allow_other,reconnect,ServerAliveInterval=15,ServerAliveCountMax=3
 ```
 

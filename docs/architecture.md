@@ -107,7 +107,7 @@ Ensure there is a file called ".ncdata" in the root of the data directory.
 A correct mount should show something similar to:
 
 ```txt
-u628575@u628575.your-storagebox.de:/  1.0T  204M  1.0T   1% /mnt/storagebox
+uxxxxxx@uxxxxxx.your-storagebox.de:/  1.0T  204M  1.0T   1% /mnt/storagebox
 ```
 
 It should not show `/dev/sda1`.

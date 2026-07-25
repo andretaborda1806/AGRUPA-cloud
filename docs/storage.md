@@ -50,13 +50,13 @@ The Hetzner Storage Box is accessed through SFTP/SSHFS.
 Storage Box user:
 
 ```txt id="fi33sp"
-u628575
+uxxxxxx
 ```
 
 Storage Box host:
 
 ```txt id="d5f0qj"
-u628575.your-storagebox.de
+uxxxxxx.your-storagebox.de
 ```
 
 Remote path used:
@@ -74,7 +74,7 @@ Local mountpoint:
 Manual mount command:
 
 ```bash id="ak4twu"
-sudo sshfs -p 22 u628575@u628575.your-storagebox.de:/ /mnt/storagebox \
+sudo sshfs -p 22 uxxxxxx@uxxxxxx.your-storagebox.de:/ /mnt/storagebox \
   -o allow_other,reconnect,ServerAliveInterval=15,ServerAliveCountMax=3
 ```
 
@@ -90,7 +90,7 @@ df -h /mnt/storagebox
 Correct output should show something like:
 
 ```txt id="93b1ci"
-u628575@u628575.your-storagebox.de:/  1.0T  204M  1.0T   1% /mnt/storagebox
+uxxxxxx@uxxxxxx.your-storagebox.de:/  1.0T  204M  1.0T   1% /mnt/storagebox
 ```
 
 Incorrect output looks like this:
@@ -167,7 +167,7 @@ sudo mkdir -p /mnt/storagebox
 Mount the Storage Box:
 
 ```bash id="jkzcpx"
-sudo sshfs -p 22 u628575@u628575.your-storagebox.de:/ /mnt/storagebox \
+sudo sshfs -p 22 uxxxxxx@uxxxxxx.your-storagebox.de:/ /mnt/storagebox \
   -o allow_other,reconnect,ServerAliveInterval=15,ServerAliveCountMax=3
 ```
 

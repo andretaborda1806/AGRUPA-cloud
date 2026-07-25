@@ -22,13 +22,13 @@ Private IP used during testing:
 Storage Box host:
 
 ```txt id="5x6agc"
-u628575.your-storagebox.de
+uxxxxxx.your-storagebox.de
 ```
 
 Storage Box user:
 
 ```txt id="g5b2qd"
-u628575
+uxxxxxx
 ```
 
 ## Access model
@@ -84,7 +84,7 @@ http://10.0.0.2:9980
 SFTP test:
 
 ```bash id="093eou"
-sftp -P 22 u628575@u628575.your-storagebox.de
+sftp -P 22 uxxxxxx@uxxxxxx.your-storagebox.de
 ```
 
 Expected result after login:
@@ -111,7 +111,7 @@ Remote working directory: /
 SSHFS mount:
 
 ```bash id="mgcoxh"
-sudo sshfs -p 22 u628575@u628575.your-storagebox.de:/ /mnt/storagebox \
+sudo sshfs -p 22 uxxxxxx@uxxxxxx.your-storagebox.de:/ /mnt/storagebox \
   -o allow_other,reconnect,ServerAliveInterval=15,ServerAliveCountMax=3
 ```
 
@@ -144,7 +144,7 @@ curl -I http://10.0.0.2
 Check Storage Box DNS:
 
 ```bash id="41zeul"
-getent hosts u628575.your-storagebox.de
+getent hosts uxxxxxx.your-storagebox.de
 ```
 
 ## Security notes
@@ -201,7 +201,7 @@ If `/mnt/storagebox` shows `/dev/sda1`, the Storage Box is not mounted.
 ```bash id="6szx1l"
 docker compose stop nextcloud
 
-sudo sshfs -p 22 u628575@u628575.your-storagebox.de:/ /mnt/storagebox \
+sudo sshfs -p 22 uxxxxxx@uxxxxxx.your-storagebox.de:/ /mnt/storagebox \
   -o allow_other,reconnect,ServerAliveInterval=15,ServerAliveCountMax=3
 
 docker compose up -d nextcloud
@@ -232,7 +232,7 @@ Incorrect:
 Correct:
 
 ```txt id="va895a"
-u628575@u628575.your-storagebox.de:/ ... /mnt/storagebox
+uxxxxxx@uxxxxxx.your-storagebox.de:/ ... /mnt/storagebox
 ```
 
 ### Recovery
@@ -243,7 +243,7 @@ docker compose stop nextcloud
 sudo mv /mnt/storagebox /mnt/storagebox.local-wrong-$(date +%Y%m%d-%H%M%S)
 sudo mkdir -p /mnt/storagebox
 
-sudo sshfs -p 22 u628575@u628575.your-storagebox.de:/ /mnt/storagebox \
+sudo sshfs -p 22 uxxxxxx@uxxxxxx.your-storagebox.de:/ /mnt/storagebox \
   -o allow_other,reconnect,ServerAliveInterval=15,ServerAliveCountMax=3
 ```
 
