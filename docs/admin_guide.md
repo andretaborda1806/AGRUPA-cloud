@@ -1,4 +1,4 @@
-# docs/admin-guide.md
+
 
 # AGRUPA Cloud — Administrator Guide
 

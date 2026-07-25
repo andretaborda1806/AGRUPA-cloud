@@ -1,4 +1,4 @@
-# docs/architecture.md
+
 
 # AGRUPA Cloud — Architecture
 

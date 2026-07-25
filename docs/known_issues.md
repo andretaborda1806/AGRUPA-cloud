@@ -1,4 +1,3 @@
-# docs/known-issues.md
 
 # AGRUPA Cloud — Known Issues
 

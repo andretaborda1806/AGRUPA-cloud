@@ -1,4 +1,3 @@
-# docs/future-improvements.md
 
 # AGRUPA Cloud — Future Improvements
 

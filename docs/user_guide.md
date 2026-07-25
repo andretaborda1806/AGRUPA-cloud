@@ -1,4 +1,3 @@
-# docs/user-guide.md
 
 # AGRUPA Cloud — User Guide
 

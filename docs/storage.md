@@ -1,4 +1,3 @@
-# docs/storage.md
 
 # AGRUPA Cloud — Storage Documentation
 

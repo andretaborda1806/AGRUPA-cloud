@@ -1,4 +1,4 @@
-# docs/runbook.md
+
 
 # AGRUPA Cloud — Operational Runbook
 

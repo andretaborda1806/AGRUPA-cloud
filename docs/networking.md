@@ -1,4 +1,3 @@
-# docs/networking.md
 
 # AGRUPA Cloud — Networking Documentation
 

@@ -1,4 +1,4 @@
-# docs/changelog.md
+
 
 # AGRUPA Cloud — Changelog
 
